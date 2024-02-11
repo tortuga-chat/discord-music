@@ -1,0 +1,6 @@
+# IDE
+.idea
+# PROJECT
+target/
+db/
+dependency-reduced-pom.xml

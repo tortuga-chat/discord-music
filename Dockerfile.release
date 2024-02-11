@@ -1,0 +1,8 @@
+FROM eclipse-temurin:21.0.2_13-jre
+LABEL authors="pedrovh"
+
+WORKDIR /opt/tortuga-discord/tortuga-music
+
+ADD https://github.com/tortuga-discord/Music/releases/latest/download/tortuga-music.jar ./tortuga-music.jar
+
+ENTRYPOINT ["java", "-jar", "tortuga-music.jar"]
