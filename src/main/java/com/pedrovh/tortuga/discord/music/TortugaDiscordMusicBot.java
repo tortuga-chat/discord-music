@@ -2,6 +2,7 @@ package com.pedrovh.tortuga.discord.music;
 
 import com.pedrovh.tortuga.discord.core.DiscordBot;
 import com.pedrovh.tortuga.discord.core.DiscordResource;
+import com.pedrovh.tortuga.discord.core.scheduler.SchedulerService;
 import lombok.extern.slf4j.Slf4j;
 
 import static com.pedrovh.tortuga.discord.core.DiscordProperties.DISCORD_TOKEN;
@@ -12,6 +13,8 @@ public class TortugaDiscordMusicBot {
     public static void main(String[] args) {
         DiscordBot bot = new DiscordBot(DiscordResource.get(DISCORD_TOKEN));
         bot.start().join();
+
+        SchedulerService.getInstance();
 
         log.info("""
                 tortuga music is online!

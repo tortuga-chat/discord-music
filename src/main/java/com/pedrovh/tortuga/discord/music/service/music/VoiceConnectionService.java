@@ -29,6 +29,7 @@ public class VoiceConnectionService {
 
     @Getter
     private static final AudioPlayerManager playerManager;
+    @Getter
     private static final ConcurrentHashMap<Long, GuildAudioManager> audioManagers = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<Long, AudioConnection> connections = new ConcurrentHashMap<>();
 
