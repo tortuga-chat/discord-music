@@ -134,7 +134,7 @@ public class UserPlaylistService {
         var manager = VoiceConnectionService.getGuildAudioManager(server.getId()).orElseThrow(EmptyQueueException::new);
 
         var queue = new ArrayList<Track>();
-        queue.add(new Track(manager.getPlayer().getPlayingTrack().getInfo()));
+        queue.add(new Track(Optional.ofNullable(manager.getPlayer().getPlayingTrack()).orElseThrow(EmptyQueueException::new).getInfo()));
         queue.addAll(manager.getScheduler().getQueue().stream().map(AudioTrack::getInfo).map(Track::new).toList());
 
         return queue;

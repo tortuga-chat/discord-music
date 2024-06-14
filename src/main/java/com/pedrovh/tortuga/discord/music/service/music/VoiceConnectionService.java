@@ -1,6 +1,5 @@
 package com.pedrovh.tortuga.discord.music.service.music;
 
-import com.pedrovh.tortuga.discord.core.DiscordResource;
 import com.pedrovh.tortuga.discord.music.service.music.manager.GuildAudioManager;
 import com.sedmelluq.discord.lavaplayer.player.AudioConfiguration;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
@@ -11,7 +10,7 @@ import com.sedmelluq.discord.lavaplayer.source.http.HttpAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.soundcloud.SoundCloudAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.twitch.TwitchStreamAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.vimeo.VimeoAudioSourceManager;
-import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
+import dev.lavalink.youtube.YoutubeAudioSourceManager;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.javacord.api.audio.AudioConnection;
@@ -20,9 +19,6 @@ import org.javacord.api.entity.channel.ServerVoiceChannel;
 
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static com.pedrovh.tortuga.discord.music.util.TortugaProperties.GOOGLE_PASSWORD;
-import static com.pedrovh.tortuga.discord.music.util.TortugaProperties.GOOGLE_USERNAME;
 
 @Slf4j
 public class VoiceConnectionService {
@@ -34,16 +30,12 @@ public class VoiceConnectionService {
     private static final ConcurrentHashMap<Long, AudioConnection> connections = new ConcurrentHashMap<>();
 
     static {
-        String username = DiscordResource.get(GOOGLE_USERNAME);
-        String password = DiscordResource.get(GOOGLE_PASSWORD);
-
         playerManager = new DefaultAudioPlayerManager();
 
         playerManager.getConfiguration().setResamplingQuality(AudioConfiguration.ResamplingQuality.HIGH);
 
-        log.info("Logging on youtube with user '{}'", username);
-        playerManager.registerSourceManager(new YoutubeAudioSourceManager(true, username, password));
         // TODO add spotify
+        playerManager.registerSourceManager(new YoutubeAudioSourceManager());
         playerManager.registerSourceManager(SoundCloudAudioSourceManager.createDefault());
         playerManager.registerSourceManager(new BandcampAudioSourceManager());
         playerManager.registerSourceManager(new VimeoAudioSourceManager());
