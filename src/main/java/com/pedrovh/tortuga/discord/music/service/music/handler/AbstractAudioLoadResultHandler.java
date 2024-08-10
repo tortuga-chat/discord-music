@@ -24,7 +24,7 @@ public abstract class AbstractAudioLoadResultHandler implements AudioLoadResultH
     protected final String identifier;
     protected final Server server;
 
-    public AbstractAudioLoadResultHandler(GuildAudioManager manager,
+    protected AbstractAudioLoadResultHandler(GuildAudioManager manager,
                                           ServerVoiceChannel voiceChannel,
                                           String identifier) {
         this.manager = manager;

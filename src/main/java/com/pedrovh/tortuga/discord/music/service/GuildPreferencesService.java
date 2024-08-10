@@ -7,9 +7,12 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Optional;
 
 @Slf4j
+@SuppressWarnings("unused")
 public class GuildPreferencesService {
 
     private static final DAO<GuildPreferences, Long> dao = new DAO<>(GuildPreferences.class);
+
+    private GuildPreferencesService() {}
 
     public static boolean exists(Long id) {
         return dao.exists(id);

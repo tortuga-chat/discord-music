@@ -42,8 +42,9 @@ public class VoiceConnectionService {
         playerManager.registerSourceManager(new TwitchStreamAudioSourceManager());
         playerManager.registerSourceManager(new BeamAudioSourceManager());
         playerManager.registerSourceManager(new HttpAudioSourceManager());
-//        playerManager.registerSourceManager(new LocalAudioSourceManager());
     }
+
+    private VoiceConnectionService(){}
 
     public static void leaveVoiceChannel(ServerVoiceChannel channel) {
         Long id = channel.getServer().getId();
@@ -60,7 +61,7 @@ public class VoiceConnectionService {
     }
 
     public static void createAudioConnection(ServerVoiceChannel channel, AudioSource source) {
-        connections.computeIfAbsent(channel.getServer().getId(), (f) -> {
+        connections.computeIfAbsent(channel.getServer().getId(), f -> {
             log.info("[{}] connecting to voice channel {}", channel.getServer().getName(), channel.getName());
             return channel.connect().join();
         });

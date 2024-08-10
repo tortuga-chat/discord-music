@@ -118,7 +118,7 @@ public class Playlist extends BaseSlashVoiceChannelCommandHandler {
         if(name.isPresent() && name.get().getStringValue().isPresent()) {
             updater.join().addEmbed(new EmbedBuilder()
                             .setTitle(getMessage(server.getPreferredLocale(), "command.playlist.list.title", name))
-                            .setDescription(UserPlaylistService.list(user.getIdAsString(), server, name.get().getStringValue().get()))
+                            .setDescription(UserPlaylistService.list(user.getIdAsString(), server, name.orElseThrow().getStringValue().orElseThrow()))
                             .setColor(getColor(COLOR_SUCCESS)))
                     .setFlags(MessageFlag.EPHEMERAL)
                     .update();

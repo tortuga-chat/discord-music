@@ -23,8 +23,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
+@SuppressWarnings("LoggingSimilarMessage")
 public class UserPlaylistService {
     private static final DAO<UserPlaylists, String> dao = new DAO<>(UserPlaylists.class);
+
+    private UserPlaylistService(){}
 
     public static boolean save(String userId, Server server, String name) throws BotException {
         UserPlaylists userPlaylists = get(userId).orElseGet(() -> {
@@ -49,7 +52,8 @@ public class UserPlaylistService {
 
     public static void update(String userId, Server server, String name) throws BotException {
         final var userPlaylists = get(userId).orElseThrow(() -> new PlaylistNeverSavedException(server.getPreferredLocale()));
-        get(userId, name).orElseThrow(() -> new PlaylistNotFoundException(server.getPreferredLocale()));
+        if (get(userId, name).isEmpty())
+            throw new PlaylistNotFoundException(server.getPreferredLocale());
 
         userPlaylists.getPlaylists().removeIf(p -> p.getName().equalsIgnoreCase(name));
         userPlaylists.getPlaylists().add(new Playlist(name, buildTrackQueue(server)));

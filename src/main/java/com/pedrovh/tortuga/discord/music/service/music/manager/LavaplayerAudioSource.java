@@ -23,6 +23,7 @@ public class LavaplayerAudioSource extends AudioSourceBase {
     }
 
     @Override
+    @SuppressWarnings("java:S1168")
     public byte[] getNextFrame() {
         if (lastFrame == null) {
             return null;

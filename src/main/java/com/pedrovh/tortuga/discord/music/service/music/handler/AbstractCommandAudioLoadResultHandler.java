@@ -9,7 +9,7 @@ public abstract class AbstractCommandAudioLoadResultHandler extends AbstractAudi
 
     protected final InteractionOriginalResponseUpdater updater;
 
-    public AbstractCommandAudioLoadResultHandler(GuildAudioManager manager,
+    protected AbstractCommandAudioLoadResultHandler(GuildAudioManager manager,
                                                  ServerVoiceChannel voiceChannel,
                                                  String identifier,
                                                  InteractionOriginalResponseUpdater updater) {

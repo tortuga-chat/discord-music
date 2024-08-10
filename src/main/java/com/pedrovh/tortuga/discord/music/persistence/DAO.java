@@ -1,11 +1,12 @@
 package com.pedrovh.tortuga.discord.music.persistence;
 
-import com.pedrovh.tortuga.discord.music.infrastructure.config.Jsondb;
+import com.pedrovh.tortuga.discord.music.infrastructure.config.JsonDB;
 import io.jsondb.JsonDBTemplate;
 
 import java.util.List;
 import java.util.Optional;
 
+@SuppressWarnings("unused")
 public class DAO<E, T> {
 
     protected final Class<E> type;
@@ -13,7 +14,7 @@ public class DAO<E, T> {
 
     public DAO(Class<E> type) {
         this.type = type;
-        this.jsondb = Jsondb.getJsonDB();
+        this.jsondb = JsonDB.getJsonDB();
         if(!jsondb.collectionExists(type))
             jsondb.createCollection(type);
     }

@@ -25,6 +25,8 @@ public class MusicService {
 
     private static final String YOUTUBE_QUERY = "ytsearch: ";
 
+    private MusicService(){}
+
     public static void skip(final ServerVoiceChannel voiceChannel) {
         VoiceConnectionService.getGuildAudioManager(voiceChannel).getScheduler().nextTrack();
     }

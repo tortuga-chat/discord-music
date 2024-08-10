@@ -11,12 +11,11 @@ import org.javacord.api.entity.server.Server;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 import static com.pedrovh.tortuga.discord.music.util.TortugaProperties.TASK_DISCONNECT_AFTER;
 
 @Slf4j
-@Task(initialDelay = 5, period = 5, unit = TimeUnit.MINUTES)
+@Task(initialDelay = "5", period = "5", unit = "MINUTES")
 public class DisconnectOnIdleTask implements Runnable {
 
     @Override

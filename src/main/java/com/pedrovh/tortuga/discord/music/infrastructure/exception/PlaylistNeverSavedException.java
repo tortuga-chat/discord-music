@@ -6,6 +6,7 @@ import org.javacord.api.entity.message.embed.EmbedBuilder;
 
 import java.util.Locale;
 
+@SuppressWarnings("unused")
 public class PlaylistNeverSavedException extends BotException {
 
     private final Locale locale;

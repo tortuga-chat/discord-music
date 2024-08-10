@@ -7,6 +7,7 @@ import com.pedrovh.tortuga.discord.core.command.slash.BaseSlashCommandHandler;
 import com.pedrovh.tortuga.discord.core.exception.BotException;
 import com.pedrovh.tortuga.discord.core.i18n.MessageResource;
 import com.pedrovh.tortuga.discord.music.service.GuildPreferencesService;
+import java.util.Collections;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.interaction.SlashCommandOption;
 
@@ -20,7 +21,7 @@ public class Help extends BaseSlashCommandHandler {
 
     @Override
     protected void handle() throws BotException {
-        boolean setupNeeded = interaction.getServer().isEmpty() || ! GuildPreferencesService.exists(interaction.getServer().get().getId());
+        boolean setupNeeded = interaction.getServer().isEmpty() || ! GuildPreferencesService.exists(interaction.getServer().orElseThrow().getId());
 
         EmbedBuilder embed = new EmbedBuilder()
                 .setTitle(MessageResource.getMessage("command.help.title"))
@@ -38,7 +39,7 @@ public class Help extends BaseSlashCommandHandler {
 
     @Override
     public List<SlashCommandOption> getOptions() {
-        return null;
+        return Collections.emptyList();
     }
 
 }

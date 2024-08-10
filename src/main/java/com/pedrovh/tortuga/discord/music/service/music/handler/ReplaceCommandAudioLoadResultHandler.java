@@ -14,6 +14,7 @@ import static com.pedrovh.tortuga.discord.core.DiscordProperties.COLOR_SUCCESS;
 import static com.pedrovh.tortuga.discord.core.DiscordResource.getColor;
 
 @Slf4j
+@SuppressWarnings("LoggingSimilarMessage")
 public class ReplaceCommandAudioLoadResultHandler extends NextCommandAudioLoadResultHandler {
 
     private final Long position;

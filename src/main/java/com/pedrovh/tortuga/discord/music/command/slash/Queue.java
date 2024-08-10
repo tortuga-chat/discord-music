@@ -11,6 +11,7 @@ import org.javacord.api.interaction.SlashCommandOption;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Collections;
 import java.util.List;
 
 import static com.pedrovh.tortuga.discord.core.DiscordProperties.COLOR_SUCCESS;
@@ -42,7 +43,7 @@ public class Queue extends BaseSlashServerCommandHandler {
 
     @Override
     public List<SlashCommandOption> getOptions() {
-        return null;
+        return Collections.emptyList();
     }
 
 }

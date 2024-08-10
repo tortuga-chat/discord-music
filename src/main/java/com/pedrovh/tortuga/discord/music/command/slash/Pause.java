@@ -4,6 +4,7 @@ import com.pedrovh.tortuga.discord.core.command.Command;
 import com.pedrovh.tortuga.discord.core.command.slash.BaseSlashServerCommandHandler;
 import com.pedrovh.tortuga.discord.core.exception.BotException;
 import com.pedrovh.tortuga.discord.music.service.music.MusicService;
+import java.util.Collections;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.interaction.SlashCommandOption;
 
@@ -29,6 +30,6 @@ public class Pause extends BaseSlashServerCommandHandler {
 
     @Override
     public List<SlashCommandOption> getOptions() {
-        return null;
+        return Collections.emptyList();
     }
 }

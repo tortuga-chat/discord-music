@@ -22,6 +22,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 @Slf4j
 @Getter
+@SuppressWarnings("LoggingSimilarMessage")
 public class TrackScheduler extends AudioEventAdapter {
 
     private final BlockingQueue<AudioTrack> queue;
@@ -93,6 +94,7 @@ public class TrackScheduler extends AudioEventAdapter {
         List<AudioTrack> tracks = TrackUtils.getTracksAfterSelectedTrack(playlist);
 
         log.info("[{}] adding playlist {} to queue", server.getName(), playlist.getName());
+        //noinspection ResultOfMethodCallIgnored
         tracks.forEach(queue::offer);
 
         if(player.getPlayingTrack() == null)
