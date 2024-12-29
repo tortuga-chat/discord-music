@@ -2,6 +2,7 @@ package com.pedrovh.tortuga.discord.music.service.music.handler;
 
 import com.pedrovh.tortuga.discord.core.i18n.MessageResource;
 import com.pedrovh.tortuga.discord.music.service.music.manager.GuildAudioManager;
+import com.pedrovh.tortuga.discord.music.service.statistic.GuildStatisticsService;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import lombok.extern.slf4j.Slf4j;
@@ -31,13 +32,17 @@ public class DefaultAudioLoadResultHandler extends AbstractAudioLoadResultHandle
     @Override
     protected void handleTrackLoaded(AudioTrack track) {
         manager.getScheduler().queue(track);
+        GuildStatisticsService.addTrackInfo(server.getId(), message.getAuthor().getId(), track.getInfo(), identifier);
     }
 
     @Override
     protected void handlePlaylistLoaded(AudioPlaylist playlist) {
         List<AudioTrack> tracks = manager.getScheduler().queuePlaylist(playlist);
         StringBuilder sb = new StringBuilder();
-        tracks.forEach(track -> sb.append(track.getInfo().title).append("\n"));
+        tracks.forEach(track -> {
+            sb.append(track.getInfo().title).append("\n");
+            GuildStatisticsService.addTrackInfo(server.getId(), message.getAuthor().getId(), track.getInfo(), identifier);
+        });
 
         log.info("[{}] Loading playlist '{}'", server.getName(), playlist.getName());
         EmbedBuilder embed = new EmbedBuilder()

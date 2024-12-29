@@ -2,11 +2,13 @@ package com.pedrovh.tortuga.discord.music.persistence;
 
 import com.pedrovh.tortuga.discord.music.infrastructure.config.JsonDB;
 import io.jsondb.JsonDBTemplate;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Optional;
 
 @SuppressWarnings("unused")
+@Slf4j
 public class DAO<E, T> {
 
     protected final Class<E> type;
@@ -17,6 +19,8 @@ public class DAO<E, T> {
         this.jsondb = JsonDB.getJsonDB();
         if(!jsondb.collectionExists(type))
             jsondb.createCollection(type);
+        if (jsondb.isCollectionReadonly(type))
+            log.warn("collection {} is read-only!", type.getSimpleName());
     }
 
     public boolean exists(T id) {

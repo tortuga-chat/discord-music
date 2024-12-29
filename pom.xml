@@ -6,7 +6,7 @@
 
     <groupId>com.pedrovh</groupId>
     <artifactId>tortuga-discord-music</artifactId>
-    <version>0.5</version>
+    <version>0.7</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>com.pedrovh</groupId>
             <artifactId>tortuga-discord-core</artifactId>
-            <version>LATEST</version>
+            <version>0.7</version>
         </dependency>
         <dependency>
             <groupId>dev.arbjerg</groupId>

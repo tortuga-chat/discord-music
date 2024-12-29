@@ -31,11 +31,12 @@ public class VoiceConnectionService {
 
     static {
         playerManager = new DefaultAudioPlayerManager();
-
         playerManager.getConfiguration().setResamplingQuality(AudioConfiguration.ResamplingQuality.HIGH);
 
         // TODO add spotify
-        playerManager.registerSourceManager(new YoutubeAudioSourceManager());
+        YoutubeAudioSourceManager youtube = new YoutubeAudioSourceManager();
+
+        playerManager.registerSourceManager(youtube);
         playerManager.registerSourceManager(SoundCloudAudioSourceManager.createDefault());
         playerManager.registerSourceManager(new BandcampAudioSourceManager());
         playerManager.registerSourceManager(new VimeoAudioSourceManager());
