@@ -15,6 +15,7 @@ import java.util.List;
 
 import static com.pedrovh.tortuga.discord.core.DiscordProperties.COLOR_SUCCESS;
 import static com.pedrovh.tortuga.discord.core.DiscordResource.getColor;
+import static com.pedrovh.tortuga.discord.music.util.TortugaProperties.DESC_LIMIT;
 
 @Slf4j
 public class DefaultAudioLoadResultHandler extends AbstractAudioLoadResultHandler {
@@ -39,20 +40,19 @@ public class DefaultAudioLoadResultHandler extends AbstractAudioLoadResultHandle
     protected void handlePlaylistLoaded(AudioPlaylist playlist) {
         List<AudioTrack> tracks = manager.getScheduler().queuePlaylist(playlist);
         StringBuilder sb = new StringBuilder();
-        tracks.forEach(track -> {
-            sb.append(track.getInfo().title).append("\n");
-            GuildStatisticsService.addTrackInfo(server.getId(), message.getAuthor().getId(), track.getInfo(), identifier);
-        });
+        tracks.forEach(track -> sb.append(track.getInfo().title).append("\n"));
 
-        log.info("[{}] Loading playlist '{}'", server.getName(), playlist.getName());
+        log.info("[{}] Loading playlist '{}' with '{}' tracks", server.getName(), playlist.getName(), playlist.getTracks().size());
         EmbedBuilder embed = new EmbedBuilder()
                 .setTitle(MessageResource.getMessage(server.getPreferredLocale(), "command.music.loadingPlaylist", tracks.size()))
-                .setDescription(sb.toString())
+                .setDescription(sb.substring(0, DESC_LIMIT))
                 .setColor(getColor(COLOR_SUCCESS));
 
         new MessageBuilder()
                 .addEmbed(embed)
                 .send(message.getChannel());
+
+        GuildStatisticsService.addTrackInfoInBulk(message.getAuthor().getId(), server.getId(), tracks, identifier);
     }
 
     @Override

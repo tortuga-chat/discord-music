@@ -3,6 +3,7 @@ package com.pedrovh.tortuga.discord.music.service.statistic;
 import com.pedrovh.tortuga.discord.music.persistence.DAO;
 import com.pedrovh.tortuga.discord.music.persistence.model.GuildStatistics;
 import com.pedrovh.tortuga.discord.music.persistence.model.TrackInfo;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,6 +32,16 @@ public class GuildStatisticsService {
         log.debug("Adding TrackInfo {} to Guild statistics: {}", trackInfo.getIdentifier(), guildId);
         GuildStatistics statistics = get(guildId);
         statistics.addTrackInfo(trackInfo);
+        DAO.save(statistics);
+    }
+
+    public static void addTrackInfoInBulk(long userId, long guildId, List<AudioTrack> tracks, String identifier) {
+        log.debug("Adding TrackInfo for playlist {} to Guild statistics: {}", identifier, guildId);
+        GuildStatistics statistics = get(guildId);
+        tracks.stream()
+                .map(AudioTrack::getInfo)
+                .forEachOrdered(i ->
+                        statistics.addTrackInfo(new TrackInfo(userId, i.title, i.author, i.length, identifier)));
         DAO.save(statistics);
     }
 
