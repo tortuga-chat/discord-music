@@ -21,6 +21,7 @@ public class ResponseUtils {
                         getMessage("emoji.song"),
                         duration,
                         track.getInfo().title))
+                .setThumbnail(track.getInfo().artworkUrl)
                 .setFooter(track.getInfo().author)
                 .setColor(getColor(COLOR_SUCCESS));
     }
@@ -33,6 +34,7 @@ public class ResponseUtils {
                         duration,
                         track.getInfo().title))
                 .setDescription(track.getInfo().author)
+                .setThumbnail(track.getInfo().artworkUrl)
                 .setColor(getColor(COLOR_SUCCESS));
     }
 

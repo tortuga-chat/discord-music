@@ -8,7 +8,6 @@ import com.sedmelluq.discord.lavaplayer.source.bandcamp.BandcampAudioSourceManag
 import com.sedmelluq.discord.lavaplayer.source.beam.BeamAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.http.HttpAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.soundcloud.SoundCloudAudioSourceManager;
-import com.sedmelluq.discord.lavaplayer.source.twitch.TwitchStreamAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.vimeo.VimeoAudioSourceManager;
 import dev.lavalink.youtube.YoutubeAudioSourceManager;
 import lombok.Getter;
@@ -19,6 +18,7 @@ import org.javacord.api.entity.channel.ServerVoiceChannel;
 
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class VoiceConnectionService {
@@ -40,7 +40,6 @@ public class VoiceConnectionService {
         playerManager.registerSourceManager(SoundCloudAudioSourceManager.createDefault());
         playerManager.registerSourceManager(new BandcampAudioSourceManager());
         playerManager.registerSourceManager(new VimeoAudioSourceManager());
-        playerManager.registerSourceManager(new TwitchStreamAudioSourceManager());
         playerManager.registerSourceManager(new BeamAudioSourceManager());
         playerManager.registerSourceManager(new HttpAudioSourceManager());
     }
@@ -64,10 +63,16 @@ public class VoiceConnectionService {
     public static void createAudioConnection(ServerVoiceChannel channel, AudioSource source) {
         connections.computeIfAbsent(channel.getServer().getId(), f -> {
             log.info("[{}] connecting to voice channel {}", channel.getServer().getName(), channel.getName());
-            return channel.connect().join();
+            try {
+                return channel.connect().get(10, TimeUnit.SECONDS);
+            } catch (Exception e) {
+                log.error("[{}] Failed to connect to voice channel {}", channel.getServer().getName(), channel.getName(), e);
+                throw new RuntimeException(e);
+            }
         });
         AudioConnection connection = connections.get(channel.getServer().getId());
 
+        log.debug("[{}] setting audio source...", channel.getServer().getName());
         if(connection.getAudioSource().isEmpty())
             connection.setAudioSource(source);
     }

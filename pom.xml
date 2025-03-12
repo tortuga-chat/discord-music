@@ -6,7 +6,7 @@
 
     <groupId>com.pedrovh</groupId>
     <artifactId>tortuga-discord-music</artifactId>
-    <version>0.7</version>
+    <version>0.7.1</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -38,17 +38,17 @@
         <dependency>
             <groupId>com.pedrovh</groupId>
             <artifactId>tortuga-discord-core</artifactId>
-            <version>0.7</version>
+            <version>0.7.1</version>
         </dependency>
         <dependency>
             <groupId>dev.arbjerg</groupId>
             <artifactId>lavaplayer</artifactId>
-            <version>LATEST</version>
+            <version>2.2.2</version>
         </dependency>
         <dependency>
             <groupId>dev.lavalink.youtube</groupId>
             <artifactId>v2</artifactId>
-            <version>LATEST</version>
+            <version>1.11.5</version>
         </dependency>
         <!--database-->
         <dependency>
@@ -59,18 +59,18 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>LATEST</version>
+            <version>2.18.2</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
-            <version>LATEST</version>
+            <version>2.18.2</version>
         </dependency>
         <!--util-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>LATEST</version>
+            <version>1.18.36</version>
             <scope>provided</scope>
         </dependency>
         <!--logging-->
@@ -102,7 +102,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>LATEST</version>
+                            <version>1.18.36</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

@@ -17,11 +17,15 @@
             <AppenderRef ref="LogToConsole"/>
             <AppenderRef ref="LogToFile"/>
         </Logger>
-        <Logger name="com.sedmelluq.discord.lavaplayer" level="warn" additivity="false">
+        <Logger name="com.sedmelluq.discord.lavaplayer" level="info" additivity="false">
             <AppenderRef ref="LogToConsole"/>
             <AppenderRef ref="LogToFile"/>
         </Logger>
-        <Logger name="io.jsondb.JsonDBTemplate" level="warn" additivity="false">
+        <Logger name="dev.lavalink.youtube" level="info" additivity="false">
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="LogToFile"/>
+        </Logger>
+        <Logger name="io.jsondb.JsonDBTemplate" level="info" additivity="false">
             <AppenderRef ref="LogToConsole"/>
             <AppenderRef ref="LogToFile"/>
         </Logger>

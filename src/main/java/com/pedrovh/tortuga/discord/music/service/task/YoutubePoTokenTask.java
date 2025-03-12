@@ -10,7 +10,7 @@ import java.io.FileReader;
 import java.util.Scanner;
 
 @Slf4j
-@Task(initialDelay = "0", period = "12", unit = "HOURS")
+@Task(initialDelay = "0", period = "1", unit = "HOURS")
 public class YoutubePoTokenTask implements Runnable {
 
     @Override
